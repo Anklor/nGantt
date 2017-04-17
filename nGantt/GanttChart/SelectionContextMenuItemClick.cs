@@ -10,7 +10,7 @@ namespace nGantt.GanttChart
         public SelectionContextMenuItem(SelectionContextMenuItemClick contextMenuItemClick, string name)
         {
             ContextMenuItemClickCommand = new DelegateCommand<Period>(x => contextMenuItemClick(x));
-            this.Name = name;
+            Name = name;
         }
 
         public string Name { get; set; }

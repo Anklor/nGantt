@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
@@ -9,32 +6,26 @@ namespace nGantt.GanttChart
 {
     public class GanttRowPanel : Panel 
     {
-        public static readonly DependencyProperty StartDateProperty =
-           DependencyProperty.RegisterAttached("StartDate", typeof(DateTime), typeof(GanttRowPanel), new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsParentArrange));
-        public static readonly DependencyProperty EndDateProperty =
-            DependencyProperty.RegisterAttached("EndDate", typeof(DateTime), typeof(GanttRowPanel), new FrameworkPropertyMetadata(DateTime.MaxValue, FrameworkPropertyMetadataOptions.AffectsParentArrange));
+        public static readonly DependencyProperty StartDateProperty = DependencyProperty.RegisterAttached("StartDate", typeof(DateTime), typeof(GanttRowPanel), 
+            new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsParentArrange));
+        public static readonly DependencyProperty EndDateProperty = DependencyProperty.RegisterAttached("EndDate", typeof(DateTime), typeof(GanttRowPanel), 
+            new FrameworkPropertyMetadata(DateTime.MaxValue, FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
-        public static readonly DependencyProperty MaxDateProperty =
-           DependencyProperty.Register("MaxDate", typeof(DateTime), typeof(GanttRowPanel), new FrameworkPropertyMetadata(DateTime.MaxValue, FrameworkPropertyMetadataOptions.AffectsMeasure));
-        public static readonly DependencyProperty MinDateProperty =
-            DependencyProperty.Register("MinDate", typeof(DateTime), typeof(GanttRowPanel), new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty MaxDateProperty = DependencyProperty.Register("MaxDate", typeof(DateTime), typeof(GanttRowPanel), 
+            new FrameworkPropertyMetadata(DateTime.MaxValue, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty MinDateProperty = DependencyProperty.Register("MinDate", typeof(DateTime), typeof(GanttRowPanel),
+            new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
 
-        public static DateTime GetStartDate(DependencyObject obj)
-        {
-            return (DateTime)obj.GetValue(StartDateProperty);
-        }
-
+        public static DateTime GetStartDate(DependencyObject obj) => (DateTime)obj.GetValue(StartDateProperty);
+        
         public static void SetStartDate(DependencyObject obj, DateTime value)
         {
             obj.SetValue(StartDateProperty, value);
         }
 
-        public static DateTime GetEndDate(DependencyObject obj)
-        {
-            return (DateTime)obj.GetValue(EndDateProperty);
-        }
-
+        public static DateTime GetEndDate(DependencyObject obj) => (DateTime)obj.GetValue(EndDateProperty);
+        
         public static void SetEndDate(DependencyObject obj, DateTime value)
         {
             obj.SetValue(EndDateProperty, value);
@@ -55,10 +46,8 @@ namespace nGantt.GanttChart
         protected override Size MeasureOverride(Size availableSize)
         {
             foreach (UIElement child in Children)
-            {
                 child.Measure(availableSize);
-            }
-
+            
             return new Size(0, 0);
         }
 
@@ -68,10 +57,8 @@ namespace nGantt.GanttChart
             double pixelsPerTick = finalSize.Width / range;
 
             foreach (UIElement child in Children)
-            {
                 ArrangeChild(child, MinDate, pixelsPerTick, finalSize.Height);
-            }
-
+            
             return finalSize;
         }
 
@@ -89,7 +76,6 @@ namespace nGantt.GanttChart
             {
                 width = width + offset;
                 offset = 0;
-
             }
             
             double range = (MaxDate - MinDate).Ticks;

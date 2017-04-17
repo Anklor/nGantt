@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 
 namespace nGantt.GanttChart
@@ -20,11 +17,11 @@ namespace nGantt.GanttChart
             TaskProgressVisibility = Visibility.Visible;
         }
 
-        public static readonly DependencyProperty IsSelectedProperty =
-            DependencyProperty.Register("IsSelected", typeof(bool), typeof(GanttTask), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(GanttTask), 
+                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
-        public static readonly DependencyProperty IsEnabledProperty =
-           DependencyProperty.Register("IsEnabled", typeof(bool), typeof(GanttTask), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register("IsEnabled", typeof(bool), typeof(GanttTask), 
+               new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public bool IsEnabled
         {
@@ -40,22 +37,10 @@ namespace nGantt.GanttChart
 
         public double PercentageCompleted
         {
-            get 
-            {
-                return 1 - percentageCompleted;
-            }
-            set
-            {
-                percentageCompleted = value;
-            }
+            get { return 1 - percentageCompleted; }
+            set { percentageCompleted = value; }
         }
-        public string PercentageCompletedText
-        {
-            get
-            {
-                return String.Format("{0}%", Math.Round(percentageCompleted * 100, 0));
-            }
-        }
+        public string PercentageCompletedText => string.Format("{0}%", Math.Round(percentageCompleted * 100, 0));
 
     }
 }
